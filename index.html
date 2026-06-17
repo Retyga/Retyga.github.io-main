@@ -18,12 +18,60 @@
             <p>Загрузка профиля...</p>
         </div>
 
+        <!-- Menu State -->
+        <div id="menu-state" class="menu-state hidden">
+            <div class="menu-header">
+                <div class="avatar-placeholder">
+                    <img id="avatar-img" class="avatar-img hidden" alt="Avatar" />
+                    <svg id="avatar-fallback" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                        <path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h1 id="menu-greeting" class="username">Привет!</h1>
+                <p class="status-text">Выберите действие, чтобы продолжить.</p>
+            </div>
+
+            <div class="menu-cards">
+                <div class="card interactive-card">
+                    <div class="card-label">Профиль</div>
+                    <div class="card-value">Просмотр профиля и изменение почты с подтверждением паролем.</div>
+                    <button id="open-profile-btn" class="card-button">Открыть профиль</button>
+                </div>
+                <div id="referral-card" class="card referral-card">
+                    <div class="card-label">Реферальная система</div>
+                    <div class="card-value referral-summary">
+                        <div id="referral-invited" class="referral-line">👥 Приглашено: —</div>
+                        <div id="referral-reward" class="referral-line">⭐ Получено: —</div>
+                        <div id="referral-level" class="referral-line">🏆 Уровень: —</div>
+                        <div id="referral-progress-wrapper" class="referral-progress-wrapper hidden">
+                            <div id="referral-progress-label" class="referral-progress-label">🏆 Bronze</div>
+                            <div class="progress-track">
+                                <div id="referral-progress-fill" class="progress-fill"></div>
+                            </div>
+                            <div id="referral-progress-text" class="referral-progress-text">—</div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button id="copy-referral-link-btn" class="card-button">📋 Скопировать ссылку</button>
+                        <button id="open-referrals-btn" class="card-button">👥 Мои рефералы</button>
+                    </div>
+                </div>
+                <div class="card card-placeholder">
+                    <div class="card-label">Пункт 3</div>
+                    <div class="card-value">Здесь будет дополнительная опция.</div>
+                    <button class="card-button card-disabled" disabled>В разработке</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Profile Content -->
         <div id="profile-content" class="profile-content hidden">
             <!-- Header -->
             <div class="profile-header">
                 <div class="avatar-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <img id="avatar-img" class="avatar-img hidden" alt="Avatar" />
+                    <svg id="avatar-fallback" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
                         <path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
@@ -49,8 +97,17 @@
                 </div>
             </div>
 
+            <div class="card update-card">
+                <div class="card-label">Изменить почту</div>
+                <input id="new-email-input" type="email" class="input-field" placeholder="Новая почта" autocomplete="email" />
+                <input id="password-input" type="password" class="input-field" placeholder="Пароль для подтверждения" autocomplete="current-password" />
+                <button id="save-email-btn" class="btn btn-primary">Сохранить почту</button>
+                <p id="update-status" class="hint-text"></p>
+            </div>
+
             <!-- Action Buttons -->
             <div class="action-buttons">
+                <button id="back-btn" class="btn btn-secondary">Назад</button>
                 <button id="refresh-btn" class="btn btn-primary">Обновить</button>
                 <button id="close-btn" class="btn btn-secondary">Закрыть</button>
             </div>
@@ -64,6 +121,21 @@
             <button id="retry-btn" class="btn btn-primary">Попробовать снова</button>
         </div>
     </div>
+
+    <div id="referral-modal" class="modal hidden">
+        <div class="modal-overlay" data-modal-close></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Мои рефералы</h2>
+                <button id="close-referral-modal" class="close-modal" aria-label="Закрыть">×</button>
+            </div>
+            <div id="referral-list" class="referral-list"></div>
+            <div class="modal-footer">
+                <button id="close-referral-modal-bottom" class="btn btn-secondary">Закрыть</button>
+            </div>
+        </div>
+    </div>
+    <div id="toast" class="toast hidden"></div>
 
     <script src="script.js"></script>
 </body>
